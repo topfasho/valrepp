@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6f2;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #ff66b2;
+            font-size: 3rem;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .yes {
+            background-color: #ff4da6;
+        }
+        .no {
+            background-color: #999;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            width: 20px;
+            height: 20px;
+            background-color: #ff4da6;
+            position: absolute;
+            transform: rotate(45deg);
+            animation: float 4s ease-in-out infinite;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4da6;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        .message {
+            font-size: 2.5rem;
+            color: #ff4da6;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Benedicta Dufie Agyeman-Dua, Will You Be My Valentine?</h1>
+        <div class="buttons">
+            <button class="yes" onclick="sayYes()">Yes</button>
+            <button class="no" onclick="sayNo()">No</button>
+        </div>
+        <div class="message">Yay! You said yes! My little monkey !! 💖</div>
+    </div>
+    <div class="hearts"></div>
+
+    <script>
+        function sayYes() {
+            const heartsContainer = document.querySelector('.hearts');
+            const message = document.querySelector('.message');
+
+            // Show the message
+            message.style.display = 'block';
+
+            // Generate hearts all over the screen continuously
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heartsContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 100);
+        }
+
+        function sayNo() {
+            const noButton = document.querySelector('.no');
+            noButton.remove();
+        }
+    </script>
+</body>
+</html>
